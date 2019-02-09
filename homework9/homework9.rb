@@ -6,8 +6,13 @@ word_count = {}
 
 # ファイルの内容を一行ずつ取り出す
 file.each_line { |line|
+  # 空行（改行コードしかない行）の場合、次の行へ
+  if line.chomp == "" then
+    next
+  end
   # 空白で分割（単語毎に分割）
   words = line.split
+  
   # 一番最後の"."（ピリオド）を削除
   words[words.length - 1] = words[words.length - 1].chop
   # 単語をアルファベット順にソート
