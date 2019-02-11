@@ -1,7 +1,7 @@
 class WordCounter
-  def initialize()
+  def initialize(path)
     # ファイルをオープン
-    @file = File.open("homework10.txt")
+    @file = File.open(path)
   end
 
   # ファイル内の全単語毎のカウント
@@ -15,21 +15,21 @@ class WordCounter
       if line.chomp == "" then
         next
       end
-      lineSplit(line)
+      lineSplit(line.downcase)
     }
 
     # ファイルをクローズ
     @file.close
 
     # 登場回数の多い順にソート
-    @desc_word_count = {}
-    @desc_word_count = @word_count.sort { |a, b| b[1] <=> a[1] }.to_h
+    @desc_word_count = []
+    @desc_word_count = @word_count.sort { |a, b| b[1] <=> a[1] }
   end
 
   # 出力
-  def output()
-    # 一番最初のキーを出力
-    p @desc_word_count.keys[0]
+  def getFirst()
+    # 一番最初を返す
+    return @desc_word_count[0]
   end
 
   private
@@ -61,6 +61,9 @@ class WordCounter
   end
 end
 
-word_counter = WordCounter.new()
-word_counter.count()
-word_counter.output()
+if __FILE__ == $0 then
+  path = "homework10.txt"
+  word_counter = WordCounter.new(path)
+  word_counter.count()
+  p word_counter.getFirst()[0]
+end
