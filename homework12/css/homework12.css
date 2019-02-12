@@ -1,0 +1,16 @@
+/* テーブルのスタイル */
+#img_table {
+  border: solid;
+  margin: 0 auto;
+}
+
+/* テーブルの中のセルのスタイル */
+td {
+  border: solid;
+}
+
+/* ボタンのスタイル */
+#button {
+  margin: 0 auto;
+  display: block;
+}
