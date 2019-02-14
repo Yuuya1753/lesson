@@ -74,7 +74,6 @@ count_array = all_words.values.select { |count| count > 1 }
 average = count_array.sum / count_array.length
 # 分散
 variance = (count_array.sum { |count| count ** 2 } / count_array.length) - (average ** 2)
-variance2 = count_array.sum { |count| (count-average)**2 } / count_array.length
 # 標準偏差
 standard_deviation = Math.sqrt(variance)
 
