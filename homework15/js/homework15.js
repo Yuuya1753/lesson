@@ -1,11 +1,11 @@
-// var startX;
-// var startY;
+var firstPos;
+var secondPos;
 var clickCount;
 
 // 初期化
 function initialize() {
-	// startX = 0;
-	// startY = 0;
+	firstPos = { x: 0, y: 0 };
+	secondPos = { x: 0, y: 0 };
 	clickCount = 0;
 }
 
@@ -22,8 +22,34 @@ function getMousePosition(canvas, e) {
 function mouseMove(context, canvas, e) {
 	var mousePos = getMousePosition(canvas, e);
 
-	if (clickCount === 1 || clickCount === 2) {
+	switch(clickCount) {
+		// 1回目のクリック後
+		case 1:
+			// キャンバス全体をクリア、パスの初期化をしつつ、
+			// 1回目のクリックの座標から現在のマウスの座標へ線を引く
+			context.clearRect(0, 0, canvas.width, canvas.height);
+			context.beginPath();
+			context.moveTo(firstPos.x, firstPos.y);
+			context.lineTo(mousePos.x, mousePos.y);
+			context.stroke();
+		break;
 
+		// 2回目のクリック後
+		case 2:
+			// キャンバス全体をクリア、パスの初期化、
+			// 1回目のクリックの座標から2回目のクリックの座標へと線を引きつつ、
+			// 2回目のクリックの座標から現在のマウスの座標へ線を引く
+			context.clearRect(0, 0, canvas.width, canvas.height);
+			context.beginPath();
+			context.moveTo(firstPos.x, firstPos.y);
+			context.lineTo(secondPos.x, secondPos.y);
+			context.lineTo(mousePos.x, mousePos.y);
+			context.stroke();
+		break;
+
+		// それ以外（何もしない）
+		default:
+		break;
 	}
 }
 
@@ -35,25 +61,19 @@ function mouseClick(context, canvas, e) {
 	switch(clickCount) {
 		// クリック1回目
 		case 1:
-			// startX = mousePos.x;
-			// startY = mousePos.y;
-			// 最初の点
-			context.beginPath();
-			context.moveTo(mousePos.x, mousePos.y);
+			// 1回目のクリックした座標を保存
+			firstPos = mousePos;
 		break;
 		
 		// クリック2回目
 		case 2:
-			// startX = mousePos.x;
-			// startY = mousePos.y;
-			// 2番目の点
-			context.lineTo(mousePos.x, mousePos.y);
-			context.stroke();
+			// 2回目のクリックした座標を保存
+			secondPos = mousePos;
 		break;
 
 		// クリック3回目
 		case 3:
-			// 3番目の点
+			// 3回目のクリックした座標へ線を引く
 			context.lineTo(mousePos.x, mousePos.y);
 			context.closePath();
 
@@ -68,8 +88,8 @@ function mouseClick(context, canvas, e) {
 		case 4:
 			// キャンバス全体をクリア
 			context.clearRect(0, 0, canvas.width, canvas.height);
-			// クリック回数を初期化
-			clickCount = 0;
+			// 初期化
+			initialize();
 		break;
 
 		// それ以外（何もしない）
