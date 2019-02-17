@@ -40,7 +40,7 @@ class WordCounter
 				v2 <=> v1
 			end
 		}
-		# p sort_count
+
 		return sort_count[0, 10].to_h
 	end
 
@@ -56,7 +56,7 @@ class WordCounter
 		# 既に登場した単語の場合、値に1加算
 		if @word_count.has_key?(word) then
 			@word_count[word] += 1
-			# 初登場の単語の場合、値に1を設定
+		# 初登場の単語の場合、値に1を設定
 		else
 			@word_count[word] = 1
 		end
@@ -72,7 +72,6 @@ json_file.close
 files = []
 # JSONファイルに書かれたディレクトリのファイルを1つずつオープン
 directories["Directories"].each { |dir|
-	p dir
 	Dir.children(dir).each { |file|
 		file_count = {}
 		path = dir + file
@@ -88,4 +87,3 @@ all_files = {"Files": files}
 open("output.json", "w") { |file|
 	JSON.dump(all_files, file)
 }
-# p all_files
