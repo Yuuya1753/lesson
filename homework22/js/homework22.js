@@ -51,6 +51,7 @@ $(function() {
 			title: {
 				text: "word count result"
 			},
+			axisX: { labelAngle: -90},
 			data: [
 				{
 					type: "column",
@@ -58,8 +59,6 @@ $(function() {
 				}
 			]
 		};
-		// $("#result").html(text);
-		// console.log(wordCounter(text));
 		$("#result").CanvasJSChart(options);
 	});
 });
