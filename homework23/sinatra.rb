@@ -1,5 +1,5 @@
 require 'sinatra'
-  get '/homework23' do
+  post '/homework23' do
     content_type :json
     initialize()
     data = wordCounter(params[:text]).to_h
