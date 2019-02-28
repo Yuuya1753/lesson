@@ -46,7 +46,7 @@ require 'sinatra'
 
 	private
 	def lineSplit(line)
-		return line.split
+		return line.split(/[ |\[|\]]/)
 	end
 
 	def wordCount(word)
