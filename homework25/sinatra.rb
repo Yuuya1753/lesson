@@ -23,10 +23,10 @@ require 'sinatra'
 			if line.chomp == "" then
 				next
       end
+			line.gsub!(".", "")
       
 			words = lineSplit(line.downcase)
 
-			words[-1].chop!
 			words.each { |word|
 				wordCount(word)
 			}
