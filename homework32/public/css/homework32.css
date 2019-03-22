@@ -1,0 +1,16 @@
+#notice, #showed_notice {
+	color: white;
+	background-color: blue;
+	width: 100%;
+	position: absolute;
+	left: 0px;
+	text-align: center;
+}
+
+#notice {
+	top: -10px;
+}
+#showed_notice {
+	top: 0px;
+	display: none;
+}

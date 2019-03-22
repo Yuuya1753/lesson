@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>homework32 page</title>
+	<link rel="stylesheet" href="../css/homework32.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	<script src="../js/homework32.js"></script>
+</head>
+<body>
+	<div id="notice"><br></div>
+	<br>
+	<form action="#" id="form">
+		<textarea id="trans_text" cols="20" rows="5"></textarea>
+		<br>
+		<input type="button" id="trans" value="翻訳">
+		<input type="button" id="clear" value="キャッシュクリア">
+		<br>
+		<label>
+			<input type="radio" name="site" id="alc" value="alc">
+			アルク
+		</label>
+		<!-- <label>
+			<input type="radio" name="site" id="alc" value="alc">
+			アルク
+		</label>
+		<label>
+			<input type="radio" name="site" id="alc" value="alc">
+			アルク
+		</label> -->
+	</form>
+	<div id="result_parent"></div>
+	<div id="showed_notice">
+		<br>
+		選択した辞書サイトから単語の訳の上位のものを取得します。
+		<br>
+		入力した単語はブラウザに保存され、次回からテキストフィールドに表示されます。
+		<br>
+		(キャッシュクリアボタンで保存された単語を削除します)
+		<br>
+		例えば、フォームに以下のように入力して翻訳ボタンを押してください。
+		<br>
+		<br>
+		flower
+		<br>
+		shooting star
+		<br>
+		輝く
+		<br>
+		<br>
+		画面をダブルクリックするとボックスの中の単語を全てクリアします。
+		<br>ESCボタンで検索した結果を全てクリアします。
+		<br>
+		<br>
+	</div>
+</body>
+</html>
