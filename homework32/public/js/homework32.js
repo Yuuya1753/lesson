@@ -28,9 +28,11 @@ $(function() {
 			type: "POST",
 			dataType: "json",
 			url: url,
-			data: $("#trans_text").val(),
+			data: { words: $("#trans_text").val() },
 			success: function(result) {
-				
+				Object.keys(result).forEach(function(key) {
+					$("#result_parent").append(result[key]);
+				});
 			}
 		});
 	});
