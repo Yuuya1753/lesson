@@ -14,3 +14,13 @@
 	top: 0px;
 	display: none;
 }
+
+.trans_key {
+	font-size: x-large;
+}
+
+.trans_site {
+	font-size: small;
+	color: white;
+	background-color: crimson;
+}

@@ -14,9 +14,14 @@ post "/homework32/alc" do
 		query["q"] = word
 		query["ref"] = "sa"
 		res = client.get(base_url, query)
+		# p res.body
 		search_result = res.body[/<span class="midashi(.*?)<\/div>/m]
-
-		result[word] = search_result
+		# p search_result[1]
+		if search_result != nil
+			result[word] = search_result.split("\n", 2)[1]
+		else
+			result[word] = "<div>語訳の取得に失敗しました。</div>"
+		end
 	}
 	result.to_json
 
