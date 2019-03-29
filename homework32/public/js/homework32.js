@@ -52,9 +52,18 @@ $(function() {
 			localStorage.setItem("trans_text", text);
 			var url = "";
 			var site = $("input[name=site]:checked").val();
+			var site_japanese = $("input[name=site]:checked").parent().text();
 			switch(site) {
 				case "alc":
 					url = "http://192.168.33.10:4567/homework32/alc";
+				break;
+
+				case "sanseido":
+					url = "http://192.168.33.10:4567/homework32/sanseido";
+				break;
+
+				case "nifty":
+					url = "http://192.168.33.10:4567/homework32/nifty";
 				break;
 			}
 			$.ajax({
@@ -73,7 +82,7 @@ $(function() {
 						$("#" + div_id).append("<br>");
 						$("#" + div_id).append("<span class='trans_key'>" + key + "</span>");
 						$("#" + div_id).append("&emsp;");
-						$("#" + div_id).append("<span class='trans_site'>&ensp;" + site + "&ensp;</span>");
+						$("#" + div_id).append("<span class='trans_site_" + site + "'>&ensp;" + site_japanese + "&ensp;</span>");
 						$("#" + div_id).append("&ensp;");
 						$("#" + div_id).append("<input type='button' class='div_close' value='Close'>");
 						$("#" + div_id).append("<hr>");

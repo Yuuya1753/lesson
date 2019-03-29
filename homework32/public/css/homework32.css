@@ -19,8 +19,20 @@
 	font-size: x-large;
 }
 
-.trans_site {
+.trans_site_alc {
 	font-size: small;
 	color: white;
 	background-color: crimson;
+}
+
+.trans_site_sanseido {
+	font-size: small;
+	color: white;
+	background-color: #369;
+}
+
+.trans_site_nifty {
+	font-size: small;
+	color: white;
+	background-color: #041d35;
 }
