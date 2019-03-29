@@ -2,6 +2,14 @@ var disp_num = 0;
 var before_div_id = "";
 
 $(function() {
+	$(document).keydown(function(e) {
+		// ESCキー押下時
+		if (e.keyCode === 27) {
+			$("#result_parent").empty();
+			disp_num = 0;
+		}
+	});
+
 	$("#trans_text").ready(function() {
 		if (localStorage.getItem("trans_text") !== null) {
 			$("#trans_text").val(localStorage.getItem("trans_text"));
