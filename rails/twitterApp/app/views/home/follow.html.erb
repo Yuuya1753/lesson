@@ -1,0 +1,11 @@
+<h1>Home#follow</h1>
+<p>Find me in app/views/home/follow.html.erb</p>
+<br>
+<div class="tweet">
+<% FolloweeTweet.find({:follower_id => @user.id}).each { |tweet| %>
+<%= tweet.text %>
+<%= tweet.email %>
+<p class="date"><%= tweet.created_at %></p>
+<br>
+<% } %>
+</div>
