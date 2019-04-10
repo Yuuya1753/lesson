@@ -3,6 +3,7 @@
 <br>
 <div class="tweet">
 <% FolloweeTweet.find({:follower_id => @user.id}).each { |tweet| %>
+<p class="id" hidden><%= tweet.id %></p>
 <%= tweet.text %>
 <%= tweet.email %>
 <p class="date"><%= tweet.created_at %></p>

@@ -12,7 +12,7 @@ $ ->
       $.ajax
         url  : '/home/append'
         type : 'post'
-        data : { "date": $(".date:last").text() }
+        data : { "tweets_id": $(".id:last").text() }
       .done (data) ->
         $(".tweet").append(data)
         console.log(data)

@@ -13,7 +13,8 @@ class HomeController < ApplicationController
   end
 
   def append
-    @date = params["date"]
+    # @date = params["date"]
+    @tweets_id = params["tweets_id"]
     render partial: "append"
   end
 

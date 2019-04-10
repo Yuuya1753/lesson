@@ -1,8 +1,7 @@
-<% FolloweeTweet.find({:follower_id => @user.id, :created_at => @date}).each { |tweet| %>
+<% FolloweeTweet.find({:follower_id => @user.id, :tweets_id => @tweets_id.to_i}).each { |tweet| %>
+<p class="id" hidden><%= tweet.id %></p>
 <%= tweet.text %>
 <%= tweet.email %>
-<p class="date">
-<%= tweet.created_at %>
-</p>
+<p class="date"><%= tweet.created_at %></p>
 <br>
 <% } %>

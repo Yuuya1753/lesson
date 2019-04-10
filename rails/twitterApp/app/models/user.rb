@@ -9,11 +9,15 @@ class User < ApplicationRecord
 end
 
 class FolloweeTweet < ActiveRecord::Base
-    def self.find(param = {})
-      param[:limit] = 30
-      if !(param.key?(:created_at))
-        param[:created_at] = Time.now
-      end
+  def self.find(param = {})
+    param[:limit] = 30
+    if !(param.key?(:created_at))
+      param[:created_at] = Time.now
+    end
+    if param.key?(:tweets_id)
+      User.find_by_sql(['SELECT * FROM (SELECT "users".* FROM "users" INNER JOIN "relationships" ON "users"."id" = "relationships"."followee_id" WHERE "relationships"."follower_id" = :follower_id) AS "followee_user" INNER JOIN "tweets" ON "followee_user"."id" = "tweets"."user_id" WHERE "tweets"."id" < :tweets_id ORDER BY "tweets"."created_at" DESC LIMIT :limit', param])
+    else
       User.find_by_sql(['SELECT * FROM (SELECT "users".* FROM "users" INNER JOIN "relationships" ON "users"."id" = "relationships"."followee_id" WHERE "relationships"."follower_id" = :follower_id) AS "followee_user" INNER JOIN "tweets" ON "followee_user"."id" = "tweets"."user_id" WHERE "tweets"."created_at" < :created_at ORDER BY "tweets"."created_at" DESC LIMIT :limit', param])
     end
+  end
 end
