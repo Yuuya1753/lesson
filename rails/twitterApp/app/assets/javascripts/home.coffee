@@ -2,6 +2,16 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
+count_new_tweets = ->
+  $.ajax
+    url  : '/home/count_tweets'
+    type : 'post'
+    data : { "tweets_id": $(".id:first").text() }
+  .done (data) ->
+    $("#count-new-tweets").html(data)
+    console.log(data)
+  .fail (data) -> alert 'fail'
+
 $ ->
   $(window).on 'scroll', () ->
     doch = $(document).innerHeight()
@@ -17,3 +27,5 @@ $ ->
         $(".tweet").append(data)
         console.log(data)
       .fail (data) -> alert 'fail'
+
+  setInterval count_new_tweets, 10000

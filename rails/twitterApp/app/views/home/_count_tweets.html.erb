@@ -1,0 +1,13 @@
+<div id="count-new-tweets">
+新着ツイートは
+<% FolloweeTweet.count_new_tweets({:follower_id => @user.id, :tweets_id => @tweets_id.to_i}).each { |count_result| %>
+<% if count_result.count > 0 %>
+<%= count_result.count %>
+件です
+<% else %>
+ありません
+<% end %>
+<% } %>
+<br>
+<br>
+</div>

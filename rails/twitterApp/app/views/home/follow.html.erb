@@ -1,6 +1,7 @@
 <h1>Home#follow</h1>
 <p>Find me in app/views/home/follow.html.erb</p>
 <br>
+<div id="count-new-tweets"></div>
 <div class="tweet">
 <% FolloweeTweet.find({:follower_id => @user.id}).each { |tweet| %>
 <p class="id" hidden><%= tweet.id %></p>

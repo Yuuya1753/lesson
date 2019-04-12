@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  before_action :set_login_user, only: [:index, :follow, :append]
+  before_action :set_login_user, only: [:index, :follow, :append, :count_tweets]
   before_action :set_user, only: [:other]
 
   def index
@@ -16,6 +16,11 @@ class HomeController < ApplicationController
     # @date = params["date"]
     @tweets_id = params["tweets_id"]
     render partial: "append"
+  end
+  
+  def count_tweets
+    @tweets_id = params["tweets_id"]
+    render partial: "count_tweets"
   end
 
   private
