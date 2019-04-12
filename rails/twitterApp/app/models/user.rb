@@ -24,4 +24,8 @@ class FolloweeTweet < ActiveRecord::Base
   def self.count_new_tweets(param)
     User.find_by_sql(['SELECT COUNT(*) AS "count" FROM (SELECT "users".* FROM "users" INNER JOIN "relationships" ON "users"."id" = "relationships"."followee_id" WHERE "relationships"."follower_id" = :follower_id) AS "followee_user" INNER JOIN "tweets" ON "followee_user"."id" = "tweets"."user_id" WHERE "tweets"."id" > :tweets_id', param])
   end
+  
+  def self.find_new_tweets(param)
+    User.find_by_sql(['SELECT * FROM (SELECT "users".* FROM "users" INNER JOIN "relationships" ON "users"."id" = "relationships"."followee_id" WHERE "relationships"."follower_id" = :follower_id) AS "followee_user" INNER JOIN "tweets" ON "followee_user"."id" = "tweets"."user_id" WHERE "tweets"."id" > :tweets_id ORDER BY "tweets"."created_at" DESC LIMIT :limit', param])
+  end
 end

@@ -2,7 +2,7 @@
 新着ツイートは
 <% FolloweeTweet.count_new_tweets({:follower_id => @user.id, :tweets_id => @tweets_id.to_i}).each { |count_result| %>
 <% if count_result.count > 0 %>
-<%= count_result.count %>
+<%= link_to count_result.count, home_append_new_path(tweets_id: @tweets_id.to_i, limit: count_result.count), method: :post, remote: true %>
 件です
 <% else %>
 ありません

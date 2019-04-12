@@ -1,0 +1,7 @@
+<% FolloweeTweet.find_new_tweets({:follower_id => @user.id, :tweets_id => @tweets_id.to_i, :limit => @limit}).each { |tweet| %>
+<p class="id" hidden><%= tweet.id %></p>
+<%= tweet.text %>
+<%= tweet.email %>
+<p class="date"><%= tweet.created_at %></p>
+<br>
+<% } %>
