@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :tweets
   has_many :relationships, foreign_key: "follower_id"
   has_many :following, through: :relationships, source: :followee
+  mount_uploader :icon, ImageUploader
 end
 
 class FolloweeTweet < ActiveRecord::Base

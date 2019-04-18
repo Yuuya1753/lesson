@@ -12,20 +12,21 @@ count_new_tweets = ->
     console.log(data)
   .fail (data) -> alert 'fail'
 
-$ ->
-  $(window).on 'scroll', () ->
-    doch = $(document).innerHeight()
-    winh = $(window).innerHeight()
-    bottom = doch - winh
-    if bottom <= $(window).scrollTop()
-      console.log("test")
-      $.ajax
-        url  : '/home/append'
-        type : 'post'
-        data : { "tweets_id": $(".id:last").text() }
-      .done (data) ->
-        $(".tweet").append(data)
-        console.log(data)
-      .fail (data) -> alert 'fail'
+if location.pathname == "/home/follow"
+  $ ->
+    $(window).on 'scroll', () ->
+      doch = $(document).innerHeight()
+      winh = $(window).innerHeight()
+      bottom = doch - winh
+      if bottom <= $(window).scrollTop()
+        console.log("test")
+        $.ajax
+          url  : '/home/append'
+          type : 'post'
+          data : { "tweets_id": $(".id:last").text() }
+        .done (data) ->
+          $(".tweet").append(data)
+          console.log(data)
+        .fail (data) -> alert 'fail'
 
-  setInterval count_new_tweets, 10000
+    setInterval count_new_tweets, 10000

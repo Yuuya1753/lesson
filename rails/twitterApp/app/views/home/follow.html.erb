@@ -8,6 +8,10 @@
 <%= tweet.text %>
 <%= tweet.email %>
 <p class="date"><%= tweet.created_at %></p>
+<% if not tweet.image.nil? %>
+<% tweet_ins = Tweet.find(tweet.id) %>
+<%= image_tag tweet_ins.image.url %>
+<% end %>
 <br>
 <% } %>
 </div>
