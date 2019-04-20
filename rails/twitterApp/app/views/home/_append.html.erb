@@ -1,4 +1,4 @@
-<% FolloweeTweet.find({:follower_id => @user.id, :tweets_id => @tweets_id.to_i}).each { |tweet| %>
+<% FolloweeTweet.find({:follower_id => @user.id, :tweets_id => @tweets_id.to_i, :operator => '<'}).each { |tweet| %>
 <p class="id" hidden><%= tweet.id %></p>
 <%= tweet.text %>
 <%= tweet.email %>

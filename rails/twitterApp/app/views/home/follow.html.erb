@@ -3,7 +3,7 @@
 <br>
 <div id="count-new-tweets"></div>
 <div class="tweet">
-<% FolloweeTweet.find({:follower_id => @user.id}).each { |tweet| %>
+<% FolloweeTweet.find({:follower_id => @user.id, :operator => '<'}).each { |tweet| %>
 <p class="id" hidden><%= tweet.id %></p>
 <%= tweet.text %>
 <%= tweet.email %>
