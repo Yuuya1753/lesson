@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  before_action :set_login_user, only: [:index, :follow, :append, :count_tweets, :append_new, :other]
+  before_action :set_login_user, only: [:index, :follow, :append, :count_tweets, :append_new, :other, :follower_list, :followee_list]
   before_action :set_user, only: [:other]
 
   def index
@@ -16,6 +16,22 @@ class HomeController < ApplicationController
 
   def follow
     
+  end
+
+  def follower_list
+    @followers = []
+    rels = Relationship.where('follower_id = ?', @user.id)
+    rels.each { |rel|
+      @followers.push(User.find(rel.followee_id))
+    }
+  end
+
+  def followee_list
+    @followees = []
+    rels = Relationship.where('followee_id = ?', @user.id)
+    rels.each { |rel|
+      @followees.push(User.find(rel.follower_id))
+    }
   end
 
   def append

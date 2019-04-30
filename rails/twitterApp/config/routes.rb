@@ -9,7 +9,8 @@ Rails.application.routes.draw do
   post 'home/append'
   post 'home/count_tweets'
   post 'home/append_new'
-
+  get 'home/follower_list'
+  get 'home/followee_list'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 

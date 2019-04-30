@@ -1,0 +1,12 @@
+<h2>フォロイーリスト</h2>
+
+<% if @followees.empty? %>
+	<%= "フォロイーはいません。" %>
+<% else %>
+	<% @followees.each do |followee| %>
+		<% if @user.email != followee.email %>
+			<%= link_to followee.email, "/home/other/#{followee.id}" %>
+			<br>
+		<% end %>
+	<% end %>
+<% end %>
