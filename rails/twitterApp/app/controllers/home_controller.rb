@@ -1,11 +1,17 @@
 class HomeController < ApplicationController
-  before_action :set_login_user, only: [:index, :follow, :append, :count_tweets, :append_new]
+  before_action :set_login_user, only: [:index, :follow, :append, :count_tweets, :append_new, :other]
   before_action :set_user, only: [:other]
 
   def index
   end
 
   def other
+    rel = Relationship.where('follower_id = ? and followee_id = ?', @user.id, @other.id)
+    if 0 < rel.size
+      @show = true
+    else
+      @show = false
+    end
   end
 
   def follow
@@ -28,6 +34,24 @@ class HomeController < ApplicationController
     @tweets_id = params["tweets_id"]
   end
 
+  def download
+    tweet_id = params[:id]
+    tweet = Tweet.find(tweet_id)
+    followee_id = tweet.user_id
+    if current_user.nil?
+      render :plain => "Access denied. Unauthorized access.", :status => :unauthorizd
+    else
+      follower_id = current_user.id
+      rel = Relationship.where('follower_id = ? and followee_id = ?', follower_id, followee_id)
+      if 0 < rel.size
+        path = "./" + request.fullpath
+        send_file path, :x_sendfile => true
+      else
+        render :plain => "Access denied. Unauthorized access.", :status => :unauthorizd
+      end
+    end
+  end
+
   private
   def set_login_user
     if user_signed_in?
@@ -38,6 +62,6 @@ class HomeController < ApplicationController
   end
 
   def set_user
-    @user = User.find(params[:id])
+    @other = User.find(params[:id])
   end
 end

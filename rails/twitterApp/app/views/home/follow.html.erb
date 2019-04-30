@@ -1,17 +1,34 @@
-<h1>Home#follow</h1>
-<p>Find me in app/views/home/follow.html.erb</p>
-<br>
-<div id="count-new-tweets"></div>
-<div class="tweet">
-<% FolloweeTweet.find({:follower_id => @user.id, :operator => '<'}).each { |tweet| %>
-<p class="id" hidden><%= tweet.id %></p>
-<%= tweet.text %>
-<%= tweet.email %>
-<p class="date"><%= tweet.created_at %></p>
-<% if not tweet.image.nil? %>
-<% tweet_ins = Tweet.find(tweet.id) %>
-<%= image_tag tweet_ins.image.url %>
-<% end %>
-<br>
-<% } %>
+<%= stylesheet_link_tag "home", :media => "all" %>
+<div class="container">
+	<h1>Home#follow</h1>
+	<p>Find me in app/views/home/follow.html.erb</p>
+	<br>
+	<div id="count-new-tweets"></div>
+	<div class="tweet">
+		<% FolloweeTweet.find({:follower_id => @user.id, :operator => '<'}).each { |tweet| %>
+			<table>
+				<tbody>
+					<tr>
+						<td>
+							<p class="id" hidden><%= tweet.id %></p>
+							<%= tweet.email %>　<%= tweet.created_at %>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<%= tweet.text %>
+						</td>
+					</tr>
+					<% if not tweet.image.nil? %>
+						<tr>
+							<td>
+									<% tweet_ins = Tweet.find(tweet.id) %>
+									<%= image_tag tweet_ins.image.url %>
+							</td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		<% } %>
+	</div>
 </div>

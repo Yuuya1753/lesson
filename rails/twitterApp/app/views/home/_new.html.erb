@@ -1,7 +1,25 @@
 <% FolloweeTweet.find({:follower_id => @user.id, :tweets_id => @tweets_id.to_i, :limit => @limit, :operator => '>'}).each { |tweet| %>
-<p class="id" hidden><%= tweet.id %></p>
-<%= tweet.text %>
-<%= tweet.email %>
-<p class="date"><%= tweet.created_at %></p>
-<br>
+	<table>
+		<tbody>
+			<tr>
+				<td>
+					<p class="id" hidden><%= tweet.id %></p>
+					<%= tweet.email %>　<%= tweet.created_at %>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<%= tweet.text %>
+				</td>
+			</tr>
+			<% if not tweet.image.nil? %>
+				<tr>
+					<td>
+							<% tweet_ins = Tweet.find(tweet.id) %>
+							<%= image_tag tweet_ins.image.url %>
+					</td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
 <% } %>

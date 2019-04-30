@@ -1,3 +1,16 @@
 // Place all the styles related to the Home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+table {
+	border: 1px black solid;
+	margin: auto;
+}
+
+td {
+	width: 500px;
+}
+
+div#count-new-tweets {
+	text-align: center;
+}

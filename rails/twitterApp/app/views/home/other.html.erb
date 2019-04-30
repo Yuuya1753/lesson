@@ -1,15 +1,19 @@
 <h1>Home#other</h1>
 <p>Find me in app/views/home/other.html.erb</p>
-<% @user.tweets.each { |tweet| %>
+<% if @show %>
+<% @other.tweets.each { |tweet| %>
 <%= tweet.text %>
 <% } %>
+<% else %>
+<%= "This acount is Private." %>
+<% end %>
 
 <%= form_with(model: Relationship.new, local: true) do |form| %>
   <div class="field">
     <%= form.hidden_field :follower_id, value: current_user.id %>
   </div>
   <div class="field">
-    <%= form.hidden_field :followee_id, value: @user.id %>
+    <%= form.hidden_field :followee_id, value: @other.id %>
   </div>
   <div class="actions">
     <%= form.submit %>

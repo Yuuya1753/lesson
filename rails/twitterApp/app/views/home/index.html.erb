@@ -1,11 +1,12 @@
 <h1>Home#index</h1>
 <p>Find me in app/views/home/index.html.erb</p>
+<%= @user.private %>
 <% if not @user.icon.url.nil? %>
-<%= image_tag @user.icon.url %>
+	<%= image_tag @user.icon.url %>
 <% end %>
 <% @user.tweets.each { |tweet| %>
-<%= tweet.text %>
-<% if not tweet.image.url.nil? %>
-<%= image_tag tweet.image.url %>
-<% end %>
+	<%= tweet.text %>
+	<% if not tweet.image.url.nil? %>
+		<%= image_tag tweet.image.url %>
+	<% end %>
 <% } %>
