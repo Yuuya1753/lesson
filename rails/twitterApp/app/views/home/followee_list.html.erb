@@ -5,7 +5,7 @@
 <% else %>
 	<% @followees.each do |followee| %>
 		<% if @user.email != followee.email %>
-			<%= link_to followee.email, "/home/other/#{followee.id}" %>
+			<%= link_to followee.email, "/#{followee.account}" %>
 			<br>
 		<% end %>
 	<% end %>

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   post 'home/append_new'
   get 'home/follower_list'
   get 'home/followee_list'
+  get '/:account', to: 'home#other'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 

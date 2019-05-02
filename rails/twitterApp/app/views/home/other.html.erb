@@ -1,8 +1,12 @@
 <h1>Home#other</h1>
 <p>Find me in app/views/home/other.html.erb</p>
+<%= "email:#{@other.email}" %>
+<br>
+<br>
 <% if @show %>
 <% @other.tweets.each { |tweet| %>
 <%= tweet.text %>
+<br>
 <% } %>
 <% else %>
 <%= "This acount is Private." %>

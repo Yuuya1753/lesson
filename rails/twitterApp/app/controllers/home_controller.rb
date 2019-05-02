@@ -78,6 +78,10 @@ class HomeController < ApplicationController
   end
 
   def set_user
-    @other = User.find(params[:id])
+    if params[:account].nil?
+      @other = User.find(params[:id])
+    else
+      @other = User.find_by_account(params[:account])
+    end
   end
 end
