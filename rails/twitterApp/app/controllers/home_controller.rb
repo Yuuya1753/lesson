@@ -3,6 +3,8 @@ class HomeController < ApplicationController
   before_action :set_user, only: [:other]
 
   def index
+    @follower_rels = Relationship.where('follower_id = ? and followee_id != ?', @user.id, @user.id)
+    @followee_rels = Relationship.where('follower_id != ? and followee_id = ?', @user.id, @user.id)
   end
 
   def other
