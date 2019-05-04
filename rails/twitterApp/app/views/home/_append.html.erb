@@ -1,10 +1,22 @@
 <% FolloweeTweet.find({:follower_id => @user.id, :tweets_id => @tweets_id.to_i, :operator => '<'}).each { |tweet| %>
+	<% tweet_time = (Time.now - tweet.created_at) / 60 %>
 	<table>
 		<tbody>
 			<tr>
 				<td>
 					<p class="id" hidden><%= tweet.id %></p>
-					<%= tweet.email %>　<%= tweet.created_at %>
+					<% user_ins = User.find(tweet.user_id) %>
+					<% if not user_ins.icon.url.nil? %>
+						<%= image_tag user_ins.icon.url, size: "50x50" %>
+					<% end %>
+					<%= tweet.email %>
+					<% if tweet_time >= 1440 %>
+						<%= "#{(tweet_time / 1440).floor}日前" %>
+					<% elsif tweet_time < 1440 && tweet_time >= 60 %>
+						<%= "#{(tweet_time / 60).floor}時間前" %>
+					<% else %>
+						<%= "#{tweet_time.floor}分前" %>
+					<% end %>
 				</td>
 			</tr>
 			<tr>

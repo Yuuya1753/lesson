@@ -8,11 +8,15 @@ class HomeController < ApplicationController
   end
 
   def other
-    rel = Relationship.where('follower_id = ? and followee_id = ?', @user.id, @other.id)
-    if 0 < rel.size
-      @show = true
+    if @other.private
+      rel = Relationship.where('follower_id = ? and followee_id = ?', @user.id, @other.id)
+      if 0 < rel.size
+        @show = true
+      else
+        @show = false
+      end
     else
-      @show = false
+      @show = true
     end
   end
 
@@ -67,6 +71,15 @@ class HomeController < ApplicationController
       else
         render :plain => "Access denied. Unauthorized access.", :status => :unauthorizd
       end
+    end
+  end
+
+  def download_icon
+    if current_user.nil?
+      render :plain => "Access denied. Unauthorized access.", :status => :unauthorizd
+    else
+      path = "./" + request.fullpath
+      send_file path, :x_sendfile => true
     end
   end
 

@@ -1,17 +1,8 @@
+<%= stylesheet_link_tag "home", :media => "all" %>
 <h1>Home#other</h1>
 <p>Find me in app/views/home/other.html.erb</p>
 <%= "email:#{@other.email}" %>
 <br>
-<br>
-<% if @show %>
-<% @other.tweets.each { |tweet| %>
-<%= tweet.text %>
-<br>
-<% } %>
-<% else %>
-<%= "This acount is Private." %>
-<% end %>
-
 <%= form_with(model: Relationship.new, local: true) do |form| %>
   <div class="field">
     <%= form.hidden_field :follower_id, value: current_user.id %>
@@ -23,3 +14,44 @@
     <%= form.submit %>
   </div>
 <% end %>
+<br>
+<% if @show %>
+  <% @other.tweets.reverse.each { |tweet| %>
+    <% tweet_time = (Time.now - tweet.created_at) / 60 %>
+    <table>
+      <tbody>
+        <tr>
+          <td>
+            <% if not @other.icon.url.nil? %>
+              <%= image_tag @other.icon.url, size: "50x50" %>
+            <% end %>
+            <%= @other.email %>
+            <% if tweet_time >= 1440 %>
+              <%= "#{(tweet_time / 1440).floor}日前" %>
+            <% elsif tweet_time < 1440 && tweet_time >= 60 %>
+              <%= "#{(tweet_time / 60).floor}時間前" %>
+            <% else %>
+              <%= "#{tweet_time.floor}分前" %>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= tweet.text %>
+          </td>
+        </tr>
+        <% if not tweet.image.url.nil? %>
+          <tr>
+            <td>
+              <% tweet_ins = Tweet.find(tweet.id) %>
+              <%= image_tag tweet_ins.image.url %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% } %>
+<% else %>
+  <%= "This acount is Private." %>
+<% end %>
+

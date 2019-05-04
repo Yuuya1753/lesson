@@ -1,4 +1,5 @@
-<div class="navbar navbar-expand-md sticky-top">
+<%= stylesheet_link_tag "home", :media => "all" %>
+<div class="navbar navbar-expand-md bg-light sticky-top">
 	<ul class="navbar-nav ml-auto">
 		<li class="nav-item">
 			<%= link_to "タイムライン", home_follow_path, class: "nav-link" %>
@@ -14,13 +15,38 @@
 <h1>Home#index</h1>
 <p>Find me in app/views/home/index.html.erb</p>
 <%= @user.private %>
-<% if not @user.icon.url.nil? %>
-	<%= image_tag @user.icon.url %>
-<% end %>
-<% @user.tweets.each { |tweet| %>
-	<%= tweet.text %>
-	<% if not tweet.image.url.nil? %>
-		<%= image_tag tweet.image.url %>
-	<% end %>
-	<br>
+<% @user.tweets.reverse.each { |tweet| %>
+	<% tweet_time = (Time.now - tweet.created_at) / 60 %>
+	<table>
+		<tbody>
+			<tr>
+				<td>
+					<% if not @user.icon.url.nil? %>
+						<%= image_tag @user.icon.url, size: "50x50" %>
+					<% end %>
+					<%= @user.email %>
+					<% if tweet_time >= 1440 %>
+						<%= "#{(tweet_time / 1440).floor}日前" %>
+					<% elsif tweet_time < 1440 && tweet_time >= 60 %>
+						<%= "#{(tweet_time / 60).floor}時間前" %>
+					<% else %>
+						<%= "#{tweet_time.floor}分前" %>
+					<% end %>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<%= tweet.text %>
+				</td>
+			</tr>
+			<% if not tweet.image.url.nil? %>
+				<tr>
+					<td>
+						<% tweet_ins = Tweet.find(tweet.id) %>
+						<%= image_tag tweet_ins.image.url %>
+					</td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
 <% } %>

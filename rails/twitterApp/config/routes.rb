@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get '/uploads/tweet/image/:id/:file', :controller => 'home', :action => 'download'
+  get '/uploads/user/icon/:id/:file', :controller => 'home', :action => 'download_icon'
   resources :tweets
   devise_for :users
   get 'home/index'
