@@ -28,6 +28,7 @@
 .byebug_history
 
 /public/uploads
+/downloadFiles
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key

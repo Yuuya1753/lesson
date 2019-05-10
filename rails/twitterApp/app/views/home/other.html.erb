@@ -48,6 +48,15 @@
             </td>
           </tr>
         <% end %>
+        <tr>
+          <td>
+            <%= form_with(model: Retweet.new) do |form| %>
+              <div class="field"><%= form.hidden_field :tweet_id, value: tweet.id %></div>
+              <div class="field"><%= form.hidden_field :user_id, value: current_user.id %></div>
+              <div class="actions"><%= form.submit(['retweet']) %></div>
+            <% end %>
+          </td>
+        </tr>
       </tbody>
     </table>
   <% } %>
