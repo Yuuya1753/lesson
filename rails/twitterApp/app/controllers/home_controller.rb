@@ -18,6 +18,7 @@ class HomeController < ApplicationController
     else
       @show = true
     end
+    @retweets = Retweet.where('user_id = ?', @user.id).pluck(:tweet_id)
   end
 
   def follow

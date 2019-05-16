@@ -1,0 +1,1 @@
+$("#tweet_" + <%= @retweet.tweet_id %>).html('<%= form_with(model: Retweet.new) do |form| %><div class="field"><%= form.hidden_field :tweet_id, value: @retweet.tweet_id %></div><div class="field"><%= form.hidden_field :user_id, value: current_user.id %></div><div class="actions"><%= form.submit(['retweet']) %></div><% end %>')

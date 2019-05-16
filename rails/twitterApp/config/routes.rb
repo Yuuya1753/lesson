@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get 'home/followee_list'
   get '/:account', to: 'home#other'
   post 'retweets', :controller => "retweets", :action => "create"
+  delete 'retweets/:id', :controller => 'retweets', :action => 'destroy', as: 'retweet'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 

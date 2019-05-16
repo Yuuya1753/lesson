@@ -1,0 +1,1 @@
+$("#tweet_" + <%= @retweet.tweet_id %>).html('<% retweet = Retweet.find_by({ :user_id => current_user.id, :tweet_id => @retweet.tweet_id }) %><%= button_to "de-retweet", retweet, method: :delete, remote: true %>')
