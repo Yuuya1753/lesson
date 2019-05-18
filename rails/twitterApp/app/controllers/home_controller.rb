@@ -22,7 +22,7 @@ class HomeController < ApplicationController
   end
 
   def follow
-    
+    @retweets = Retweet.where('user_id = ?', @user.id).pluck(:tweet_id)
   end
 
   def follower_list

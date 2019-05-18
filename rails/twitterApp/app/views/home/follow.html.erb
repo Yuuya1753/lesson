@@ -9,6 +9,14 @@
 			<% tweet_time = (Time.now - tweet.created_at).floor / 60 %>
 			<table>
 				<tbody>
+					<% if !tweet.retweeted_account.nil? %>
+						<tr>
+							<td>
+								<%= link_to tweet.retweeted_account, "/#{tweet.retweeted_account}" %>
+								<%= " is retweeted." %>
+							</td>
+						</tr>
+					<% end %>
 					<tr>
 						<td>
 							<p class="id" hidden><%= tweet.id %></p>
@@ -16,7 +24,7 @@
 							<% if not user_ins.icon.url.nil? %>
 								<%= image_tag user_ins.icon.url, size: "50x50" %>
 							<% end %>
-							<%= tweet.tweeted_email %>
+							<%= link_to tweet.tweeted_account, "/#{tweet.tweeted_account}" %>
 							<% if tweet_time >= 1440 %>
 								<%= "#{(tweet_time / 1440)}日前" %>
 							<% elsif tweet_time < 1440 && tweet_time >= 60 %>
@@ -39,6 +47,22 @@
 							</td>
 						</tr>
 					<% end %>
+					<tr>
+					<td>
+						<div id="<%="tweet_#{tweet.id}"%>">
+							<% if @retweets.include?(tweet.id) %>
+								<% retweet = Retweet.find_by({ :user_id => @user.id, :tweet_id => tweet.id }) %>
+								<%= button_to "de-retweet", retweet, method: :delete, remote: true %>
+							<% else %>
+								<%= form_with(model: Retweet.new) do |form| %>
+									<div class="field"><%= form.hidden_field :tweet_id, value: tweet.id %></div>
+									<div class="field"><%= form.hidden_field :user_id, value: current_user.id %></div>
+									<div class="actions"><%= form.submit(['retweet']) %></div>
+								<% end %>
+							<% end %>
+						</div>
+					</td>
+				</tr>
 				</tbody>
 			</table>
 		<% } %>

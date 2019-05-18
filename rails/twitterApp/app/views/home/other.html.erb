@@ -16,16 +16,24 @@
 <% end %>
 <br>
 <% if @show %>
-  <% @other.tweets.reverse.each { |tweet| %>
+  <% OtherTweet.find({:tweet_user_id => @other.id}).each { |tweet| %>
     <% tweet_time = (Time.now - tweet.created_at).floor / 60 %>
     <table>
       <tbody>
+        <% if !tweet.retweeted_account.nil? %>
+          <tr>
+            <td>
+              <%= link_to tweet.retweeted_account, "/#{tweet.retweeted_account}" %>
+              <%= " is retweeted." %>
+            </td>
+          </tr>
+        <% end %>
         <tr>
           <td>
-            <% if not @other.icon.url.nil? %>
-              <%= image_tag @other.icon.url, size: "50x50" %>
+            <% if not tweet.icon.url.nil? %>
+              <%= image_tag tweet.icon.url, size: "50x50" %>
             <% end %>
-            <%= @other.email %>
+            <%= link_to tweet.tweeted_account, "/#{tweet.tweeted_account}" %>
             <% if tweet_time >= 1440 %>
               <%= "#{(tweet_time / 1440)}日前" %>
             <% elsif tweet_time < 1440 && tweet_time >= 60 %>
@@ -40,7 +48,7 @@
             <%= tweet.text %>
           </td>
         </tr>
-        <% if not tweet.image.url.nil? %>
+        <% if not tweet.image.nil? %>
           <tr>
             <td>
               <% tweet_ins = Tweet.find(tweet.id) %>
