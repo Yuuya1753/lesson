@@ -58,6 +58,7 @@ class HomeController < ApplicationController
   end
 
   def download
+    expires_in 30.seconds
     tweet_id = params[:id]
     tweet = Tweet.find(tweet_id)
     followee_id = tweet.user_id
@@ -73,6 +74,7 @@ class HomeController < ApplicationController
         render :plain => "Access denied. Unauthorized access.", :status => :unauthorizd
       end
     end
+    fresh_when(last_modified: File.mtime(path))
   end
 
   def download_icon
