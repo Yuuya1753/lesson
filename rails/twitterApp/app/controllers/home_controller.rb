@@ -19,10 +19,12 @@ class HomeController < ApplicationController
       @show = true
     end
     @retweets = Retweet.where('user_id = ?', @user.id).pluck(:tweet_id)
+    @likes = Like.where('user_id = ?', @user.id).pluck(:tweet_id)
   end
 
   def follow
     @retweets = Retweet.where('user_id = ?', @user.id).pluck(:tweet_id)
+    @likes = Like.where('user_id = ?', @user.id).pluck(:tweet_id)
   end
 
   def follower_list

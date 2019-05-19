@@ -1,0 +1,1 @@
+$("#like_" + <%= @likes.tweet_id %>).html('<% like = Like.find_by({ :user_id => current_user.id, :tweet_id => @likes.tweet_id }) %><%= button_to "de-like", like, method: :delete, remote: true %><%= Like.where('tweet_id = ?', @likes.tweet_id).pluck(:user_id).size %>')

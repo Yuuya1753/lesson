@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'likes/create'
   get 'retweets/create'
   get '/uploads/tweet/image/:id/:file', :controller => 'home', :action => 'download'
   get '/uploads/user/icon/:id/:file', :controller => 'home', :action => 'download_icon'
@@ -16,6 +17,8 @@ Rails.application.routes.draw do
   get '/:account', to: 'home#other'
   post 'retweets', :controller => "retweets", :action => "create"
   delete 'retweets/:id', :controller => 'retweets', :action => 'destroy', as: 'retweet'
+  post 'likes', :controller => "likes", :action => "create"
+  delete 'likes/:id', :controller => 'likes', :action => 'destroy', as: 'like'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 

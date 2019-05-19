@@ -57,8 +57,8 @@
           </tr>
         <% end %>
         <tr>
-          <td>
-            <div id="<%="tweet_#{tweet.id}"%>">
+          <td class="d-inline-flex">
+            <div class="d-inline-flex" id="<%="tweet_#{tweet.id}"%>">
               <% if @retweets.include?(tweet.id) %>
                 <% retweet = Retweet.find_by({ :user_id => @user.id, :tweet_id => tweet.id }) %>
                 <%= button_to "de-retweet", retweet, method: :delete, remote: true %>
@@ -69,6 +69,19 @@
                   <div class="actions"><%= form.submit(['retweet']) %></div>
                 <% end %>
               <% end %>
+            </div>
+            <div class="d-inline-flex" id="<%="like_#{tweet.id}"%>">
+              <% if @likes.include?(tweet.id) %>
+                <% like = Like.find_by({ :user_id => @user.id, :tweet_id => tweet.id }) %>
+                <%= button_to "de-like", like, method: :delete, remote: true %>
+              <% else %>
+                <%= form_with(model: Like.new) do |form| %>
+                  <div class="field"><%= form.hidden_field :tweet_id, value: tweet.id %></div>
+                  <div class="field"><%= form.hidden_field :user_id, value: current_user.id %></div>
+                  <div class="actions"><%= form.submit(['like']) %></div>
+                <% end %>
+              <% end %>
+              <%= Like.where('tweet_id = ?', tweet.id).pluck(:user_id).size %>
             </div>
           </td>
         </tr>
