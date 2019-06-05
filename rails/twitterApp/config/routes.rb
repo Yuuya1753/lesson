@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get '/uploads/tweet/image/:id/:file', :controller => 'home', :action => 'download'
   get '/uploads/user/icon/:id/:file', :controller => 'home', :action => 'download_icon'
   resources :tweets
-  devise_for :users
+  # devise_for :users
   get 'home/index'
   get 'home/follow'
   get '/home/other/:id', to: 'home#other'
@@ -19,6 +19,11 @@ Rails.application.routes.draw do
   delete 'retweets/:id', :controller => 'retweets', :action => 'destroy', as: 'retweet'
   post 'likes', :controller => "likes", :action => "create"
   delete 'likes/:id', :controller => 'likes', :action => 'destroy', as: 'like'
+
+  devise_for :users, controllers: {
+    omniauth_callbacks: 'users/omniauth_callbacks',
+    registrations: 'users/registrations'
+  }
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 

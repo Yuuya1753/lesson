@@ -68,3 +68,7 @@ gem 'bootstrap'
 gem 'jquery-rails'
 
 gem 'carrierwave', '~> 1.0'
+
+gem 'omniauth'
+gem 'omniauth-github'
+gem 'dotenv-rails'
